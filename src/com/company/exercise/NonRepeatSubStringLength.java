@@ -16,11 +16,11 @@ public class NonRepeatSubStringLength {
         for (int index = 0; index < s.length(); index++) {
             if (indexMapByChar.containsKey(s.charAt(index))) {
                 maxLen = getMaxLen(maxLen, curStartIndex, index);
+                int oldStartIndex = curStartIndex;
                 curStartIndex = indexMapByChar.get(s.charAt(index)) + 1;
 
-                indexMapByChar = new HashMap<>();
-                for (int i = curStartIndex; i < index; i++) {
-                    indexMapByChar.put(s.charAt(i), i);
+                for (int i = oldStartIndex; i < curStartIndex; i++) {
+                    indexMapByChar.remove(s.charAt(i));
                 }
             } else {
                 if (index == s.length() - 1) {
